@@ -44,7 +44,7 @@ export const createServer = async (opts: Options): Promise<Server> => {
       await new Promise<void>(resolve => {
         httpServer.listen({ port }, resolve)
       })
-      console.log(`🚀 Server ready at http://${host}:${port}${mountPath}`)
+      opts.logger.info(`🚀 Server ready at http://${host}:${port}${mountPath}`)
     },
     stop: async () => {
       await server.stop()

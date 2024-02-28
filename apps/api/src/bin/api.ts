@@ -1,12 +1,13 @@
 import { connectDatabase } from '@keom/db'
 import { createBusiness } from '@/business/createBusiness'
 import { createServer } from '@/graphql/createServer'
-import { waitForSignal } from '@keom/toolbox'
+import { waitForSignal, Logger, logger } from '@keom/toolbox'
 import fs from 'node:fs/promises'
 import * as Env from './env'
 
-const main = async () => {
+const main = async (logger: Logger) => {
   const database = connectDatabase({
+    logger,
     connectionPoolSize: Env.DATABASE_CONNECTION_POOL_SIZE,
     databaseUrl: Env.DATABASE_URL,
     queryTimeout: Env.DATABASE_QUERY_TIMEOUT,
@@ -17,6 +18,7 @@ const main = async () => {
   })
 
   const server = await createServer({
+    logger,
     business,
     enableDebug: Env.GRAPHQL_DEBUG,
     enableIntrospection: Env.GRAPHQL_ENABLE_INTROSPECTION,
@@ -26,14 +28,14 @@ const main = async () => {
     typeDefs: await fs.readFile(Env.GRAPHQL_SCHEMA_PATH, 'utf-8'),
   })
 
-  // await database.start()
+  await database.start()
   await server.start()
   await waitForSignal(['SIGINT', 'SIGTERM'])
   await server.stop()
-  // await database.stop()
+  await database.stop()
 }
 
-main().catch(err => {
+main(logger('keom-logger')).catch(err => {
   console.log(err)
   process.exit(1)
 })

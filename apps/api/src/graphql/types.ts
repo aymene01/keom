@@ -1,5 +1,5 @@
-import { ApolloServer } from '@apollo/server'
-import { Business } from '../business/createBusiness'
+import { Business } from '@/business/createBusiness'
+import { Logger } from '@keom/toolbox'
 
 export type Context = {
   business: Business
@@ -12,6 +12,7 @@ export type Server = {
 }
 
 export type Options = {
+  logger: Logger
   business: Business
   mountPath: string
   enableIntrospection: boolean
