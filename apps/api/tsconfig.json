@@ -8,18 +8,18 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "types": ["node"],
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-			"@/*": ["./*"],
-			"@/database": ["database"],
-			"@/business": ["business"],
-			"@/graphql/*": ["graphql/*"],
-			"@/tests/*": ["tests/*"],
-			"@/lib/*": ["lib/*"],
-			"@/resolvers/*": ["graphql/resolvers/*"],
-			"@/generated/*": ["graphql/generated/*"]
-		}
-	},
-	"include": ["src/**/*.ts", "prisma/**/*.ts"],
-	"exclude": ["node_modules", "dist"]
-  }
+      "@/*": ["./*"],
+      "@/database": ["database"],
+      "@/business": ["business"],
+      "@/graphql/*": ["graphql/*"],
+      "@/tests/*": ["tests/*"],
+      "@/lib/*": ["lib/*"],
+      "@/resolvers/*": ["graphql/resolvers/*"],
+      "@/generated/*": ["graphql/generated/*"]
+    }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}
