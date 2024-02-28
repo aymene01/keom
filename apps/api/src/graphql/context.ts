@@ -1,8 +1,7 @@
-import { Context } from "./types";
+import { Context, Options } from "./types";
 
-export const createContext = async (): Promise<Context> => {
+export const createContext = async (opts: Options): Promise<Context> => {
   return {
-    name: "John",
-    age: 30,
+    business: opts.business,
   };
 };

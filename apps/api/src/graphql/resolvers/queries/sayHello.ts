@@ -1,7 +1,10 @@
 import { QueryResolvers, Response } from "@keom/graphql";
+import { Context } from "../../types";
 
-export const sayHello: QueryResolvers["sayHello"] = (): Response => {
-  return {
-    message: "Hello, World!",
-  };
+export const sayHello: QueryResolvers<Context>["sayHello"] = (
+  _parent,
+  _args,
+  ctx,
+): Response => {
+  return ctx.business.sayHello();
 };

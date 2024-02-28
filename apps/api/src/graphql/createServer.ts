@@ -8,12 +8,12 @@ import { resolvers } from "./resolvers";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-import { Context, Server } from "./types";
+import { Context, Options, Server } from "./types";
 
 const graphqSchemaPath =
   process.cwd() + "/node_modules/@keom/graphql/schema.graphql";
 
-export const createServer = async (): Promise<Server> => {
+export const createServer = async (opts: Options): Promise<Server> => {
   const schema = await fs.readFile(path.join(graphqSchemaPath), "utf-8");
 
   const server = new ApolloServer<Context>({
@@ -27,7 +27,11 @@ export const createServer = async (): Promise<Server> => {
     start: async () => {
       const { url } = await startStandaloneServer(server, {
         listen: { port: 4000 },
-        context: createContext,
+        context: async () => {
+          return {
+            business: opts.business,
+          };
+        },
       });
 
       console.log(`🚀  Server ready at: ${url}`);
