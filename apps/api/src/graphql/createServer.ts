@@ -1,43 +1,55 @@
 import { ApolloServer } from "@apollo/server";
-import { startStandaloneServer } from "@apollo/server/standalone";
-
-import { createContext } from "./context";
+import { expressMiddleware } from "@apollo/server/express4";
+import cors from "cors";
 
 import { resolvers } from "./resolvers";
+import express from "express";
+import http from "http";
 
-import fs from "node:fs/promises";
-import path from "node:path";
+import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 
+import { promisify } from "node:util";
 import { Context, Options, Server } from "./types";
 
-const graphqSchemaPath =
-  process.cwd() + "/node_modules/@keom/graphql/schema.graphql";
-
 export const createServer = async (opts: Options): Promise<Server> => {
-  const schema = await fs.readFile(path.join(graphqSchemaPath), "utf-8");
+  const app = express();
+  const httpServer = http.createServer(app);
 
   const server = new ApolloServer<Context>({
-    typeDefs: schema,
+    typeDefs: opts.typeDefs,
     resolvers,
-    plugins: [],
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   });
+
+  await server.start();
+
+  app.use(
+    "/graphql",
+    cors<cors.CorsRequest>(),
+    express.json(),
+    expressMiddleware(server, {
+      context: async () => ({
+        business: opts.business,
+      }),
+    }),
+  );
 
   return {
     server,
     start: async () => {
-      const { url } = await startStandaloneServer(server, {
-        listen: { port: 4000 },
-        context: async () => {
-          return {
-            business: opts.business,
-          };
-        },
+      const {
+        listenAddr: { host, port },
+        mountPath,
+      } = opts;
+      await new Promise<void>((resolve) => {
+        httpServer.listen({ port: 4000 }, resolve);
       });
 
-      console.log(`🚀  Server ready at: ${url}`);
+      console.log(`🚀 Server ready at http://${host}:${port}${mountPath}`);
     },
     stop: async () => {
       await server.stop();
+      await promisify(httpServer.close).bind(httpServer)();
     },
   };
 };

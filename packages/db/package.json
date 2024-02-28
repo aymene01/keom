@@ -1,0 +1,43 @@
+{
+  "name": "@keom/db",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./types": "./src/types.ts"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./src/index.ts"
+      ],
+      "types": [
+        "./src/types.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "db:format": "dotenv -e ../../.env prisma format",
+    "db:generate": "dotenv -e ../../.env prisma generate",
+    "db:push": "dotenv -e ../../.env prisma db push",
+    "db:reset": "dotenv -e ../../.env prisma db push -- --force-reset",
+    "db:seed": "dotenv -e ../../.env tsx ./seed/dev.ts",
+    "db:prod:seed": "dotenv -e ../../.env tsx ./seed/prod.ts",
+    "db:studio": "dotenv -e ../../.env prisma studio",
+    "postinstall": "pnpm run db:generate"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "dotenv-cli": "^7.3.0",
+    "prisma": "^5.7.1",
+    "tsx": "^4.7.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.7.1"
+  }
+}

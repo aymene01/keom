@@ -7,6 +7,19 @@
     "module": "esnext",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "types": ["node"]
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+			"@/*": ["./*"],
+			"@/database": ["database"],
+			"@/business": ["business"],
+			"@/graphql/*": ["graphql/*"],
+			"@/tests/*": ["tests/*"],
+			"@/lib/*": ["lib/*"],
+			"@/resolvers/*": ["graphql/resolvers/*"],
+			"@/generated/*": ["graphql/generated/*"]
+		}
+	},
+	"include": ["src/**/*.ts", "prisma/**/*.ts"],
+	"exclude": ["node_modules", "dist"]
   }
-}
