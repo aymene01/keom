@@ -1,5 +1,7 @@
-import { QueryResolvers } from "@keom/graphql/src/server";
+import { QueryResolvers, Response } from "@keom/graphql";
 
-export const sayHello: QueryResolvers["sayHello"] = () => {
-  return "Hello, world!";
+export const sayHello: QueryResolvers["sayHello"] = (): Response => {
+  return {
+    message: "Hello, World!",
+  };
 };

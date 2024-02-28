@@ -1,7 +1,9 @@
-import { Resolvers } from "@keom/graphql/src/server";
+import { Resolvers } from "@keom/graphql";
+
+import * as queries from "./queries";
 
 export const resolvers: Resolvers = {
   Query: {
-    sayHello: () => ({ message: "Hello, world!" }),
+    sayHello: queries.sayHello,
   },
 };

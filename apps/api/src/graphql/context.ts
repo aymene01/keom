@@ -1,9 +1,6 @@
-export type Context = {
-  name: string;
-  age: number;
-};
+import { Context } from "./types";
 
-export const createContext = (): Context => {
+export const createContext = async (): Promise<Context> => {
   return {
     name: "John",
     age: 30,
