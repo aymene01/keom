@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  database:
+    container_name: keom-db
+    hostname: keom-db
+    image: postgres:latest
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: database

@@ -2,13 +2,18 @@
   "name": "keom",
   "private": true,
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
+    "build": "dotenv -- turbo build",
+    "dev:api": "dotenv -- turbo dev --scope api",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "codegen": "pnpm graphql-codegen --config codegen.yml"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/typescript": "^4.0.6",
+    "@graphql-codegen/typescript-resolvers": "^4.0.6",
+    "dotenv-cli": "^7.3.0",
     "prettier": "^3.1.1",
     "turbo": "latest"
   },

@@ -1,0 +1,22 @@
+{
+  "name": "@keom/toolbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --minify --dts --format cjs,esm --out-dir dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/lodash": "^4.14.202",
+    "tsup": "^8.0.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}

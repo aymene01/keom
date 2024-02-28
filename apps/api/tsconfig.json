@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "rootDirs": ["src"],
+    "outDir": "dist",
+    "lib": ["es2020"],
+    "target": "es2020",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "types": ["node"],
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["./*"],
+      "@/database": ["database"],
+      "@/business": ["business"],
+      "@/graphql/*": ["graphql/*"],
+      "@/tests/*": ["tests/*"],
+      "@/lib/*": ["lib/*"],
+      "@/resolvers/*": ["graphql/resolvers/*"],
+      "@/generated/*": ["graphql/generated/*"]
+    }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}
