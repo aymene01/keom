@@ -1,0 +1,10 @@
+# This configuration file tells GraphQL Code Generator how
+# to generate types based on our schema.
+schema: "./packages/graphql/schema.graphql"
+generates:
+  ./packages/graphql/src/types/types.ts:
+    plugins:
+      - "typescript"
+  ./packages/graphql/src/types/server.ts:
+    plugins:
+      - "typescript-resolvers"

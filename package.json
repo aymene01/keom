@@ -5,10 +5,14 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "codegen": "pnpm graphql-codegen --config codegen.yml"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/typescript": "^4.0.6",
+    "@graphql-codegen/typescript-resolvers": "^4.0.6",
     "prettier": "^3.1.1",
     "turbo": "latest"
   },

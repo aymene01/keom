@@ -1,0 +1,8 @@
+
+type Response {
+  message: String
+}
+
+type Query {
+  sayHello: Response
+}
