@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '../../../../packages/ui/libs/react/src'
+import { Button } from '@keom/react-ui'
 
 export default function Home() {
   return (
