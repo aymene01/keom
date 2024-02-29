@@ -2,8 +2,8 @@
   "name": "keom",
   "private": true,
   "scripts": {
-    "build": "dotenv -- turbo build",
-    "dev:api": "dotenv -- turbo dev --scope api",
+    "build": "turbo build",
+    "dev:api": "turbo dev --scope api",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "codegen": "pnpm graphql-codegen --config codegen.yml"
