@@ -1,0 +1,37 @@
+{
+  "name": "@keom/react-ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "storybook": "storybook dev -p 6006",
+    "build": "storybook build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@heroicons/react": "^2.1.1",
+    "@storybook/addon-essentials": "^7.6.6",
+    "@storybook/addon-interactions": "^7.6.6",
+    "@storybook/addon-links": "^7.6.6",
+    "@storybook/addon-onboarding": "^1.0.10",
+    "@storybook/blocks": "^7.6.6",
+    "@storybook/cli": "^7.6.6",
+    "@storybook/nextjs": "^7.6.6",
+    "@storybook/react": "^7.6.6",
+    "@storybook/test": "^7.6.6",
+    "@types/react": "^18",
+    "autoprefixer": "^10.0.1",
+    "class-variance-authority": "^0.7.0",
+    "next": "14.0.4",
+    "postcss": "^8",
+    "react": "^18",
+    "react-dom": "^18.2.0",
+    "storybook": "^7.6.6",
+    "tailwindcss": "^3.3.0"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.0.2"
+  }
+}
