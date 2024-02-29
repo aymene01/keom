@@ -14,8 +14,7 @@
       "@/database": ["database"],
       "@/business": ["business"],
       "@/graphql/*": ["graphql/*"],
-      "@/tests/*": ["tests/*"],
-      "@/lib/*": ["lib/*"],
+      "@/constant": ["constant"],
       "@/resolvers/*": ["graphql/resolvers/*"],
       "@/generated/*": ["graphql/generated/*"]
     }

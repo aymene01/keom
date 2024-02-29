@@ -2,6 +2,6 @@
     "watch": ["src"],
     "ext": "ts",
     "ignore": ["src/**/*.spec.ts"],
-    "exec": "dotenv -e ../../.env tsx src/bin/api.ts",
+    "exec": "tsx src/bin/api.ts",
     "delay": "1000"
 }

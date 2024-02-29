@@ -1,10 +1,12 @@
 import { PrismaClient } from '@prisma/client'
+import { Logger } from '@keom/toolbox'
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined
 }
 
 type DatabaseOption = {
+  logger: Logger
   databaseUrl: string
   connectionPoolSize: number
   queryTimeout: number
@@ -19,6 +21,11 @@ export function connectDatabase(opts: DatabaseOption) {
   const prisma =
     globalForPrisma.prisma ??
     new PrismaClient({
+      datasources: {
+        db: {
+          url: url.href,
+        },
+      },
       log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
     })
 
@@ -28,7 +35,7 @@ export function connectDatabase(opts: DatabaseOption) {
     prisma,
     start: async () => {
       await prisma.$connect()
-      console.log('Connected to database')
+      opts.logger.info('🔌 Successfully connected to the database.')
     },
     stop: async () => {
       await prisma.$disconnect()

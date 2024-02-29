@@ -6,18 +6,24 @@ import { resolvers } from './resolvers'
 import express from 'express'
 import http from 'http'
 
+import { partial } from 'lodash'
+
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer'
 
 import { promisify } from 'node:util'
 import { Context, Options, Server } from './types'
+import { createContext } from './context'
 
 export const createServer = async (opts: Options): Promise<Server> => {
   const app = express()
   const httpServer = http.createServer(app)
 
+  const context = partial(createContext, opts)
+
   const server = new ApolloServer<Context>({
     typeDefs: opts.typeDefs,
     resolvers,
+    introspection: opts.enableIntrospection,
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   })
 
@@ -28,11 +34,11 @@ export const createServer = async (opts: Options): Promise<Server> => {
     cors<cors.CorsRequest>(),
     express.json(),
     expressMiddleware(server, {
-      context: async () => ({
-        business: opts.business,
-      }),
+      context,
     }),
   )
+
+  httpServer.keepAliveTimeout = opts.keepAliveTimeout
 
   return {
     server,
@@ -44,7 +50,7 @@ export const createServer = async (opts: Options): Promise<Server> => {
       await new Promise<void>(resolve => {
         httpServer.listen({ port }, resolve)
       })
-      console.log(`🚀 Server ready at http://${host}:${port}${mountPath}`)
+      opts.logger.info(`🚀 Server ready at http://${host}:${port}${mountPath}`)
     },
     stop: async () => {
       await server.stop()
