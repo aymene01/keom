@@ -1,1 +1,1 @@
-module.exports = require('@keom/react-ui/postcss.config')
+module.exports = require('../../packages/ui/libs/react/postcss.config')
