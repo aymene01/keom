@@ -14,6 +14,7 @@ const main = async (logger: Logger) => {
   })
 
   const business = createBusiness({
+    logger,
     database,
   })
 
