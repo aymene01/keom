@@ -4,6 +4,12 @@ import { createServer } from '@/graphql/createServer'
 import { waitForSignal, Logger, logger } from '@keom/toolbox'
 import fs from 'node:fs/promises'
 import * as Env from './env'
+import dotenv from 'dotenv'
+import { ENV_PATH } from '../constant/config'
+
+dotenv.config({
+  path: ENV_PATH,
+})
 
 const main = async (logger: Logger) => {
   const database = connectDatabase({
