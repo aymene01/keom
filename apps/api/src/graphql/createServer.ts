@@ -1,16 +1,14 @@
+import http from 'node:http'
+import { promisify } from 'node:util'
+
 import { ApolloServer } from '@apollo/server'
 import { expressMiddleware } from '@apollo/server/express4'
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer'
 import cors from 'cors'
-
-import { resolvers } from './resolvers'
 import express from 'express'
-import http from 'http'
-
 import { partial } from 'lodash'
 
-import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer'
-
-import { promisify } from 'node:util'
+import { resolvers } from './resolvers'
 import { Context, Options, Server } from './types'
 import { createContext } from './context'
 

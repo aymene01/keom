@@ -1,11 +1,15 @@
-import { connectDatabase } from '@keom/db'
-import { createBusiness } from '@/business/createBusiness'
-import { createServer } from '@/graphql/createServer'
-import { waitForSignal, Logger, logger } from '@keom/toolbox'
 import fs from 'node:fs/promises'
-import * as Env from './env'
+
 import dotenv from 'dotenv'
+
+import { createBusiness } from '@/business/createBusiness'
+import { createIamService } from '@/iam/createIamService'
+import { createServer } from '@/graphql/createServer'
 import { ENV_PATH } from '@/constant/config'
+import * as Env from './env'
+
+import { connectDatabase } from '@keom/db'
+import { Logger, logger, waitForSignal } from '@keom/toolbox'
 
 dotenv.config({
   path: ENV_PATH,
@@ -19,9 +23,17 @@ const main = async (logger: Logger) => {
     queryTimeout: Env.DATABASE_QUERY_TIMEOUT,
   })
 
+  const iamService = createIamService({
+    logger,
+    database,
+    jwtSecretKey: Env.JWT_SECRET,
+    jwtDuration: Env.JWT_DURATION,
+  })
+
   const business = createBusiness({
     logger,
     database,
+    iamService,
   })
 
   const server = await createServer({
