@@ -15,6 +15,7 @@
       "@/business": ["business"],
       "@/graphql/*": ["graphql/*"],
       "@/constant": ["constant"],
+      "@/iam": ["iam"],
       "@/resolvers/*": ["graphql/resolvers/*"],
       "@/generated/*": ["graphql/generated/*"]
     }
