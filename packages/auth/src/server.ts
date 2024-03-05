@@ -1,7 +1,7 @@
 import NextAuth from './next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 
-const INNO_FELLOWS = ['aymene.bousbia@veepee.com']
+const AUTHORIZED_FELLOWS = ['ay.bousbia@gmail.com']
 
 export const {
   handlers: { GET, POST },
@@ -20,7 +20,7 @@ export const {
   },
   callbacks: {
     signIn: async ({ profile }) => {
-      const isAllowed = profile && profile.email?.endsWith('@veepee.com') && INNO_FELLOWS.includes(profile.email)
+      const isAllowed = profile && profile.email?.endsWith('@gmail.com') && AUTHORIZED_FELLOWS.includes(profile.email)
       return isAllowed ?? false
     },
   },
